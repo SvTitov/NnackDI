@@ -9,8 +9,9 @@ namespace Console
         {
             Container.RegistrationType<IFoo, Foo>();
             Container.RegistrationType<IFooTwo, FooTwo>();
+            Container.RegistrationType<IFooThree, FooThree>();
 
-            var getType = Container.ResolveType<IFooTwo>();
+            var getType = Container.ResolveType<IFooThree>();
 
             System.Console.ReadKey(true);
         }
@@ -37,6 +38,22 @@ namespace Console
         {
             foo.PrintAny();
         }
+    }
+
+    public class FooThree : IFooThree
+    {
+        private readonly IFoo foo;
+        private readonly IFooTwo fooTwo;
+
+        public FooThree(IFoo foo, IFooTwo fooTwo)
+        {
+            this.foo = foo;
+            this.fooTwo = fooTwo;
+        }
+    }
+
+    public interface IFooThree
+    {
     }
 
     #endregion

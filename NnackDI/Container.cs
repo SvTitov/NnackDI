@@ -41,9 +41,7 @@ namespace NnackDI
                 constrTypes.Add(parameter.ParameterType);
             }
 
-            var ss = constrTypes.Select(item => typeof(Container).GetMethod("ResolveType").MakeGenericMethod(item).Invoke(this, null)).ToArray();
-            var result = (TType)mostBiggerConstructor.Invoke(constrTypes.Select(item => typeof(Container).GetMethod("ResolveType").MakeGenericMethod(item).Invoke(this, null)).ToArray());
-
+            var result = (TType)mostBiggerConstructor.Invoke(constrTypes.Select(item => typeof(Container).GetMethod("ResolveType").MakeGenericMethod(item).Invoke(item, null)).ToArray());
             return result;
         }
 
